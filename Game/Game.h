@@ -11,6 +11,7 @@
 #include <unordered_map>
 #include <string>
 #include <vector>
+#include "Score.h"
 
 class Game
 {
@@ -54,4 +55,10 @@ private:
 
 	// Game-specific
 	class Ship* mShip; // Player's ship
+
+	Score score;
+
+	int scoreCount;
+
+	
 };

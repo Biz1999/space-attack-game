@@ -60,7 +60,7 @@ void Ship::ProcessKeyboard(const uint8_t* state)
 	// right/left
 	if (state[SDL_SCANCODE_D])
 	{
-		mRightSpeed += 250.0f;
+		mRightSpeed += 350.0f;
 	}
 	if (state[SDL_SCANCODE_A])
 	{

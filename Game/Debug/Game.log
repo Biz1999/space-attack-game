@@ -1,24 +1,16 @@
-﻿  Actor.cpp
-  AnimSpriteComponent.cpp
-  BGSpriteComponent.cpp
-  Component.cpp
-  Game.cpp
-  Main.cpp
-  Math.cpp
-  Ship.cpp
-  SpriteComponent.cpp
-  Gerando Código...
-  Game.vcxproj -> C:\Users\unifloliveira\Documents\projetos\space-attack-game\Game\Debug\Game.exe
-  C:\Users\unifloliveira\Documents\projetos\space-attack-game\Game\\..\external\SDL\lib\win\x86\libfreetype-6.dll
-  C:\Users\unifloliveira\Documents\projetos\space-attack-game\Game\\..\external\SDL\lib\win\x86\libogg-0.dll
-  C:\Users\unifloliveira\Documents\projetos\space-attack-game\Game\\..\external\SDL\lib\win\x86\libpng16-16.dll
-  C:\Users\unifloliveira\Documents\projetos\space-attack-game\Game\\..\external\SDL\lib\win\x86\libvorbis-0.dll
-  C:\Users\unifloliveira\Documents\projetos\space-attack-game\Game\\..\external\SDL\lib\win\x86\libvorbisfile-3.dll
-  C:\Users\unifloliveira\Documents\projetos\space-attack-game\Game\\..\external\SDL\lib\win\x86\SDL2.dll
-  C:\Users\unifloliveira\Documents\projetos\space-attack-game\Game\\..\external\SDL\lib\win\x86\SDL2_image.dll
-  C:\Users\unifloliveira\Documents\projetos\space-attack-game\Game\\..\external\SDL\lib\win\x86\SDL2_mixer.dll
-  C:\Users\unifloliveira\Documents\projetos\space-attack-game\Game\\..\external\SDL\lib\win\x86\SDL2_ttf.dll
-  C:\Users\unifloliveira\Documents\projetos\space-attack-game\Game\\..\external\SDL\lib\win\x86\zlib1.dll
+﻿  Digit.cpp
+C:\Users\unifabiz\Downloads\space-attack-game\Game\Digit.cpp(51): warning C4715: 'Digit::checkDrawnLeds': nem todos os caminhos de controle retornam um valor
+  Game.vcxproj -> C:\Users\unifabiz\Downloads\space-attack-game\Game\Debug\Game.exe
+  C:\Users\unifabiz\Downloads\space-attack-game\Game\\..\external\SDL\lib\win\x86\libfreetype-6.dll
+  C:\Users\unifabiz\Downloads\space-attack-game\Game\\..\external\SDL\lib\win\x86\libogg-0.dll
+  C:\Users\unifabiz\Downloads\space-attack-game\Game\\..\external\SDL\lib\win\x86\libpng16-16.dll
+  C:\Users\unifabiz\Downloads\space-attack-game\Game\\..\external\SDL\lib\win\x86\libvorbis-0.dll
+  C:\Users\unifabiz\Downloads\space-attack-game\Game\\..\external\SDL\lib\win\x86\libvorbisfile-3.dll
+  C:\Users\unifabiz\Downloads\space-attack-game\Game\\..\external\SDL\lib\win\x86\SDL2.dll
+  C:\Users\unifabiz\Downloads\space-attack-game\Game\\..\external\SDL\lib\win\x86\SDL2_image.dll
+  C:\Users\unifabiz\Downloads\space-attack-game\Game\\..\external\SDL\lib\win\x86\SDL2_mixer.dll
+  C:\Users\unifabiz\Downloads\space-attack-game\Game\\..\external\SDL\lib\win\x86\SDL2_ttf.dll
+  C:\Users\unifabiz\Downloads\space-attack-game\Game\\..\external\SDL\lib\win\x86\zlib1.dll
   10 arquivo(s) copiado(s)
-  C:\Users\unifloliveira\Documents\projetos\space-attack-game\Game\\..\external\GLEW\lib\win\x86\glew32.dll
+  C:\Users\unifabiz\Downloads\space-attack-game\Game\\..\external\GLEW\lib\win\x86\glew32.dll
   1 arquivo(s) copiado(s)
