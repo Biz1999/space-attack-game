@@ -13,6 +13,8 @@
 #include "SpriteComponent.h"
 #include "Ship.h"
 #include "BGSpriteComponent.h"
+#include "Asteroid.h"
+#include <stdlib.h> 
 
 Game::Game()
 :mWindow(nullptr)
@@ -65,6 +67,7 @@ void Game::RunLoop()
 		ProcessInput();
 		UpdateGame();
 		GenerateOutput();
+		CreateAsteroid();
 	}
 }
 
@@ -158,6 +161,8 @@ void Game::LoadData()
 	mShip->SetPosition(Vector2(100.0f, 384.0f));
 	mShip->SetScale(1.5f);
 
+	Actor* asteroid = new Asteroid(this);
+
 	// Create actor for the background (this doesn't need a subclass)
 	Actor* temp = new Actor(this);
 	temp->SetPosition(Vector2(512.0f, 384.0f));
@@ -179,6 +184,11 @@ void Game::LoadData()
 	};
 	bg->SetBGTextures(bgtexs);
 	bg->SetScrollSpeed(-200.0f);
+}
+
+void Game::CreateAsteroid() {
+	int randHeigth = rand() % 768 + 0;
+	printf("%.2d\n", randHeigth);
 }
 
 void Game::UnloadData()

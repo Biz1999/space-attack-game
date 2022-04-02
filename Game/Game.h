@@ -15,6 +15,7 @@
 class Game
 {
 public:
+	int asteroidsInGame = 0;
 	Game();
 	bool Initialize();
 	void RunLoop();
@@ -33,6 +34,7 @@ private:
 	void GenerateOutput();
 	void LoadData();
 	void UnloadData();
+	void CreateAsteroid();
 	
 	// Map of textures loaded
 	std::unordered_map<std::string, SDL_Texture*> mTextures;
