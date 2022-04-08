@@ -6,7 +6,7 @@
 using namespace std;
 Asteroid::Asteroid(Game* game)
 	:Actor(game)
-	, mRightSpeed(-300.0f)
+	,mRightSpeed(-300.0f)
 {
 	AnimSpriteComponent* asc = new AnimSpriteComponent(this);
 	vector<string> asteroidStringSprites = {
