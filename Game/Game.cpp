@@ -161,14 +161,12 @@ void Game::LoadData()
 	mShip->SetPosition(Vector2(100.0f, 384.0f));
 	mShip->SetScale(1.5f);
 
-	Actor* asteroid = new Asteroid(this);
-
 	// Create actor for the background (this doesn't need a subclass)
 	Actor* temp = new Actor(this);
 	temp->SetPosition(Vector2(512.0f, 384.0f));
 	// Create the "far back" background
 	BGSpriteComponent* bg = new BGSpriteComponent(temp);
-	bg->SetScreenSize(Vector2(1024.0f, 768.0f));
+	bg->SetScreenSize(Vector2(1024.0f, 600.0f));
 	std::vector<SDL_Texture*> bgtexs = {
 		GetTexture("Assets/Farback01.png"),
 		GetTexture("Assets/Farback02.png")
@@ -177,7 +175,7 @@ void Game::LoadData()
 	bg->SetScrollSpeed(-100.0f);
 	// Create the closer background
 	bg = new BGSpriteComponent(temp, 50);
-	bg->SetScreenSize(Vector2(1024.0f, 768.0f));
+	bg->SetScreenSize(Vector2(1024.0f, 600.0f));
 	bgtexs = {
 		GetTexture("Assets/Stars.png"),
 		GetTexture("Assets/Stars.png")
@@ -187,8 +185,17 @@ void Game::LoadData()
 }
 
 void Game::CreateAsteroid() {
-	int randHeigth = rand() % 768 + 0;
-	printf("%.2d\n", randHeigth);
+	asteroidCount += 1;
+
+	if (asteroidCount == 100) {
+		int randHeigth = rand() % 768 + 0;
+		Actor* asteroid = new Asteroid(this);
+		asteroid->SetPosition(Vector2(900.0f, randHeigth));
+		asteroid->SetScale(0.5);
+		printf("%.2d\n", randHeigth);
+		asteroidCount = 0;
+	}
+	
 }
 
 void Game::UnloadData()

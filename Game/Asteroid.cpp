@@ -1,18 +1,23 @@
 #include "Asteroid.h"
 #include "AnimSpriteComponent.h"
 #include "Game.h"
+#include <stdlib.h> 
 
+using namespace std;
 Asteroid::Asteroid(Game* game)
 	:Actor(game)
-	, mRightSpeed(0.0f)
+	, mRightSpeed(-300.0f)
 {
 	AnimSpriteComponent* asc = new AnimSpriteComponent(this);
-	std::vector<SDL_Texture*> anims = {
-		game->GetTexture("Assets/asteroid-1"),
-		game->GetTexture("Assets/asteroid-2"),
-		game->GetTexture("Assets/asteroid-3"),
-		game->GetTexture("Assets/asteroid-4"),
-		game->GetTexture("Assets/asteroid-5"),
+	vector<string> asteroidStringSprites = {
+		"Assets/asteroid-1.png",
+		"Assets/asteroid-2.png",
+		"Assets/asteroid-3.png",
+		"Assets/asteroid-4.png",
+		"Assets/asteroid-5.png"
+	};
+	vector<SDL_Texture*> anims = {
+		game->GetTexture(asteroidStringSprites[rand() % 5]),
 	};
 	asc->SetAnimTextures(anims);
 }

@@ -56,4 +56,5 @@ private:
 
 	// Game-specific
 	class Ship* mShip; // Player's ship
+	int asteroidCount = 0;
 };
