@@ -13,12 +13,14 @@
 #include "SpriteComponent.h"
 #include "Ship.h"
 #include "BGSpriteComponent.h"
+#include "Score.h"
 
 Game::Game()
 :mWindow(nullptr)
 ,mRenderer(nullptr)
 ,mIsRunning(true)
 ,mUpdatingActors(false)
+,scoreCount(0)
 {
 	
 }
@@ -148,6 +150,24 @@ void Game::GenerateOutput()
 		sprite->Draw(mRenderer);
 	}
 
+	int decimal = scoreCount / 10;
+	int numeral = scoreCount % 10;
+
+	vector<Led> allLeds = score.checkDrawnLeds(decimal, numeral);
+
+	SDL_SetRenderDrawColor(mRenderer, 255, 255, 0, 255);
+
+	for (unsigned int i = 0; i < allLeds.size(); i++) {
+		SDL_Rect led{
+		static_cast<int>(allLeds[i].x),
+		static_cast<int>(allLeds[i].y),
+		static_cast<int>(allLeds[i].width),
+		static_cast<int>(allLeds[i].height)
+		};
+		SDL_RenderFillRect(mRenderer, &led);
+	}
+
+
 	SDL_RenderPresent(mRenderer);
 }
 
@@ -179,6 +199,9 @@ void Game::LoadData()
 	};
 	bg->SetBGTextures(bgtexs);
 	bg->SetScrollSpeed(-200.0f);
+
+	if (!score.Initialize())
+		mIsRunning = false;
 }
 
 void Game::UnloadData()
