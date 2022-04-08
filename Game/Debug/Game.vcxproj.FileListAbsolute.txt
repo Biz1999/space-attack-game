@@ -2,3 +2,4 @@ C:\Users\belmo\OneDrive\Área de Trabalho\Códigos_game\code-master\Chapter02\De
 C:\Users\belmo\OneDrive\Área de Trabalho\Códigos_game\code-master\Chapter02\Debug\Game.pdb
 C:\Users\unifloliveira\Documents\projetos\space-attack-game\Game\Debug\Game.exe
 C:\Users\unifabiz\Downloads\space-attack-game\Game\Debug\Game.exe
+C:\Users\unififigueredo\Documents\SpaceAttack\space-attack-game\Game\Debug\Game.exe

@@ -21,6 +21,7 @@
     <ClCompile Include="Digit.cpp" />
     <ClCompile Include="Score.cpp" />
     <ClCompile Include="Ship.cpp" />
+    <ClCompile Include="Shot.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -33,6 +34,7 @@
     <ClInclude Include="Digit.h" />
     <ClInclude Include="Score.h" />
     <ClInclude Include="Ship.h" />
+    <ClInclude Include="Shot.h" />
     <ClInclude Include="SpriteComponent.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
