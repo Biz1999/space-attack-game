@@ -13,7 +13,9 @@
 Ship::Ship(Game* game)
 	:Actor(game)
 	,mRightSpeed(0.0f)
-	,mDownSpeed(0.0f)
+	,mDownSpeed(0.0f),
+	pointerGame(game),
+	shotCount(0)
 {
 	// Create an animated sprite component
 	AnimSpriteComponent* asc = new AnimSpriteComponent(this);
@@ -74,5 +76,30 @@ void Ship::ProcessKeyboard(const uint8_t* state)
 	if (state[SDL_SCANCODE_W])
 	{
 		mDownSpeed -= 300.0f;
+	}
+
+	if (state[SDL_SCANCODE_KP_ENTER ]) {
+
+
+		shotCount += 1;
+
+		if (shotCount == 15) {
+			
+			// Create player's ship
+			Vector2 pos = GetPosition();
+			mShot = new Shot(pointerGame);
+			mShot->SetPosition(Vector2(pos.x, pos.y));
+			mShot->SetScale(1.0f);
+
+			shotCount = 0;
+		}
+
+
+
+		
+
+
+		//printf("OI");
+
 	}
 }

@@ -126,6 +126,7 @@ void Game::UpdateGame()
 	std::vector<Actor*> deadActors;
 	for (auto actor : mActors)
 	{
+	
 		if (actor->GetState() == Actor::EDead)
 		{
 			deadActors.emplace_back(actor);

@@ -8,6 +8,7 @@
 
 #pragma once
 #include "Actor.h"
+#include "Shot.h"
 class Ship : public Actor
 {
 public:
@@ -19,4 +20,9 @@ public:
 private:
 	float mRightSpeed;
 	float mDownSpeed;
+	Game* pointerGame;
+	int shotCount;
+
+	// Game-specific
+	class Shot* mShot; //Actor Shot
 };

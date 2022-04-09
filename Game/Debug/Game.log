@@ -1,29 +1,15 @@
-﻿  Actor.cpp
-  AnimSpriteComponent.cpp
-  BGSpriteComponent.cpp
-  Component.cpp
-  Game.cpp
-  Main.cpp
-  Math.cpp
-  Digit.cpp
-  Score.cpp
-  Ship.cpp
-  Shot.cpp
-  SpriteComponent.cpp
-  Gerando Código...
-C:\Users\unififigueredo\Documents\SpaceAttack\space-attack-game\Game\Digit.cpp(51): warning C4715: 'Digit::checkDrawnLeds': nem todos os caminhos de controle retornam um valor
-  LINK : C:\Users\unififigueredo\Documents\SpaceAttack\space-attack-game\Game\Debug\Game.exe não encontrado ou não compilado pelo o último link incremental; executando link completo
-  Game.vcxproj -> C:\Users\unififigueredo\Documents\SpaceAttack\space-attack-game\Game\Debug\Game.exe
-  C:\Users\unififigueredo\Documents\SpaceAttack\space-attack-game\Game\\..\external\SDL\lib\win\x86\libfreetype-6.dll
-  C:\Users\unififigueredo\Documents\SpaceAttack\space-attack-game\Game\\..\external\SDL\lib\win\x86\libogg-0.dll
-  C:\Users\unififigueredo\Documents\SpaceAttack\space-attack-game\Game\\..\external\SDL\lib\win\x86\libpng16-16.dll
-  C:\Users\unififigueredo\Documents\SpaceAttack\space-attack-game\Game\\..\external\SDL\lib\win\x86\libvorbis-0.dll
-  C:\Users\unififigueredo\Documents\SpaceAttack\space-attack-game\Game\\..\external\SDL\lib\win\x86\libvorbisfile-3.dll
-  C:\Users\unififigueredo\Documents\SpaceAttack\space-attack-game\Game\\..\external\SDL\lib\win\x86\SDL2.dll
-  C:\Users\unififigueredo\Documents\SpaceAttack\space-attack-game\Game\\..\external\SDL\lib\win\x86\SDL2_image.dll
-  C:\Users\unififigueredo\Documents\SpaceAttack\space-attack-game\Game\\..\external\SDL\lib\win\x86\SDL2_mixer.dll
-  C:\Users\unififigueredo\Documents\SpaceAttack\space-attack-game\Game\\..\external\SDL\lib\win\x86\SDL2_ttf.dll
-  C:\Users\unififigueredo\Documents\SpaceAttack\space-attack-game\Game\\..\external\SDL\lib\win\x86\zlib1.dll
+﻿  Game.cpp
+  Game.vcxproj -> C:\Users\islan\OneDrive\Documentos\Uni\7 ciclo\CC7140 - DESENVOLVIMENTO DE JOGOS DIGITAIS\Space-Attack\space-attack-game\Game\Debug\Game.exe
+  C:\Users\islan\OneDrive\Documentos\Uni\7 ciclo\CC7140 - DESENVOLVIMENTO DE JOGOS DIGITAIS\Space-Attack\space-attack-game\Game\\..\external\SDL\lib\win\x86\libfreetype-6.dll
+  C:\Users\islan\OneDrive\Documentos\Uni\7 ciclo\CC7140 - DESENVOLVIMENTO DE JOGOS DIGITAIS\Space-Attack\space-attack-game\Game\\..\external\SDL\lib\win\x86\libogg-0.dll
+  C:\Users\islan\OneDrive\Documentos\Uni\7 ciclo\CC7140 - DESENVOLVIMENTO DE JOGOS DIGITAIS\Space-Attack\space-attack-game\Game\\..\external\SDL\lib\win\x86\libpng16-16.dll
+  C:\Users\islan\OneDrive\Documentos\Uni\7 ciclo\CC7140 - DESENVOLVIMENTO DE JOGOS DIGITAIS\Space-Attack\space-attack-game\Game\\..\external\SDL\lib\win\x86\libvorbis-0.dll
+  C:\Users\islan\OneDrive\Documentos\Uni\7 ciclo\CC7140 - DESENVOLVIMENTO DE JOGOS DIGITAIS\Space-Attack\space-attack-game\Game\\..\external\SDL\lib\win\x86\libvorbisfile-3.dll
+  C:\Users\islan\OneDrive\Documentos\Uni\7 ciclo\CC7140 - DESENVOLVIMENTO DE JOGOS DIGITAIS\Space-Attack\space-attack-game\Game\\..\external\SDL\lib\win\x86\SDL2.dll
+  C:\Users\islan\OneDrive\Documentos\Uni\7 ciclo\CC7140 - DESENVOLVIMENTO DE JOGOS DIGITAIS\Space-Attack\space-attack-game\Game\\..\external\SDL\lib\win\x86\SDL2_image.dll
+  C:\Users\islan\OneDrive\Documentos\Uni\7 ciclo\CC7140 - DESENVOLVIMENTO DE JOGOS DIGITAIS\Space-Attack\space-attack-game\Game\\..\external\SDL\lib\win\x86\SDL2_mixer.dll
+  C:\Users\islan\OneDrive\Documentos\Uni\7 ciclo\CC7140 - DESENVOLVIMENTO DE JOGOS DIGITAIS\Space-Attack\space-attack-game\Game\\..\external\SDL\lib\win\x86\SDL2_ttf.dll
+  C:\Users\islan\OneDrive\Documentos\Uni\7 ciclo\CC7140 - DESENVOLVIMENTO DE JOGOS DIGITAIS\Space-Attack\space-attack-game\Game\\..\external\SDL\lib\win\x86\zlib1.dll
   10 arquivo(s) copiado(s)
-  C:\Users\unififigueredo\Documents\SpaceAttack\space-attack-game\Game\\..\external\GLEW\lib\win\x86\glew32.dll
+  C:\Users\islan\OneDrive\Documentos\Uni\7 ciclo\CC7140 - DESENVOLVIMENTO DE JOGOS DIGITAIS\Space-Attack\space-attack-game\Game\\..\external\GLEW\lib\win\x86\glew32.dll
   1 arquivo(s) copiado(s)
