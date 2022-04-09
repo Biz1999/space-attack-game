@@ -42,7 +42,6 @@ public:
 
 	class Game* GetGame() { return mGame; }
 
-
 	// insere e remove componentes
 	void AddComponent(class Component* component);
 	void RemoveComponent(class Component* component);

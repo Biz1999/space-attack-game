@@ -35,6 +35,7 @@ private:
 	void LoadData();
 	void UnloadData();
 	void CreateAsteroid();
+	void CheckAsteroidShip(Actor asteroid, Actor ship);
 	
 	// Map of textures loaded
 	std::unordered_map<std::string, SDL_Texture*> mTextures;
@@ -56,5 +57,8 @@ private:
 
 	// Game-specific
 	class Ship* mShip; // Player's ship
+
+
+
 	int asteroidCount = 0;
 };

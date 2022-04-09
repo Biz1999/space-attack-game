@@ -6,15 +6,17 @@
 // See LICENSE in root directory for full details.
 // ----------------------------------------------------------------
 
-#include "Game.h"
-#include "SDL/SDL_image.h"
+#include <stdlib.h> 
 #include <algorithm>
-#include "Actor.h"
-#include "SpriteComponent.h"
+#include "SDL/SDL_image.h"
+#include "Game.h"
 #include "Ship.h"
+#include "Actor.h"
+#include "Actor.cpp"
+#include "SpriteComponent.h"
 #include "BGSpriteComponent.h"
 #include "Asteroid.h"
-#include <stdlib.h> 
+#include "Asteroid.cpp"
 
 Game::Game()
 :mWindow(nullptr)
@@ -166,7 +168,7 @@ void Game::LoadData()
 	temp->SetPosition(Vector2(512.0f, 384.0f));
 	// Create the "far back" background
 	BGSpriteComponent* bg = new BGSpriteComponent(temp);
-	bg->SetScreenSize(Vector2(1024.0f, 600.0f));
+	bg->SetScreenSize(Vector2(1024.0f, 760.0f));
 	std::vector<SDL_Texture*> bgtexs = {
 		GetTexture("Assets/Farback01.png"),
 		GetTexture("Assets/Farback02.png")
@@ -175,7 +177,7 @@ void Game::LoadData()
 	bg->SetScrollSpeed(-100.0f);
 	// Create the closer background
 	bg = new BGSpriteComponent(temp, 50);
-	bg->SetScreenSize(Vector2(1024.0f, 600.0f));
+	bg->SetScreenSize(Vector2(1024.0f, 760.0f));
 	bgtexs = {
 		GetTexture("Assets/Stars.png"),
 		GetTexture("Assets/Stars.png")
@@ -187,15 +189,22 @@ void Game::LoadData()
 void Game::CreateAsteroid() {
 	asteroidCount += 1;
 
-	if (asteroidCount == 100) {
-		int randHeigth = rand() % 768 + 0;
+	if (asteroidCount == 75) {
+		int randHeigth = rand() % 700 + 30;
 		Actor* asteroid = new Asteroid(this);
-		asteroid->SetPosition(Vector2(900.0f, randHeigth));
-		asteroid->SetScale(0.5);
-		printf("%.2d\n", randHeigth);
+		asteroid->SetPosition(Vector2(1100.0f, randHeigth));
+		asteroid->SetScale(0.7)
 		asteroidCount = 0;
+
 	}
-	
+}
+
+void CheckAsteroidShip(Actor asteroid, Actor ship) {
+	Vector2 posAsteroid = asteroid.GetPosition();
+	Vector2 posShip = ship.GetPosition();
+	if (posAsteroid.x == posShip.x + 50) {
+		printf("ta no local");
+	}
 }
 
 void Game::UnloadData()
