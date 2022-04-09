@@ -14,6 +14,9 @@
 #include "Ship.h"
 #include "BGSpriteComponent.h"
 #include "Score.h"
+#include <thread>
+#include <iostream>
+using namespace std;
 
 Game::Game()
 :mWindow(nullptr)
@@ -66,6 +69,7 @@ void Game::RunLoop()
 	{
 		ProcessInput();
 		UpdateGame();
+		UpdateScore();
 		GenerateOutput();
 	}
 }
@@ -101,11 +105,14 @@ void Game::UpdateGame()
 		;
 
 	float deltaTime = (SDL_GetTicks() - mTicksCount) / 1000.0f;
+
 	if (deltaTime > 0.05f)
 	{
 		deltaTime = 0.05f;
 	}
 	mTicksCount = SDL_GetTicks();
+	SecondsPassed = mTicksCount/1000;
+	scoreCount = SecondsPassed + ShipsHit;
 
 	// Update all actors
 	mUpdatingActors = true;
@@ -137,6 +144,11 @@ void Game::UpdateGame()
 	{
 		delete actor;
 	}
+}
+
+void Game::UpdateScore()
+{
+
 }
 
 void Game::GenerateOutput()

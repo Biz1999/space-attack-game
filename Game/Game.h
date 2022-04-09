@@ -31,9 +31,12 @@ public:
 private:
 	void ProcessInput();
 	void UpdateGame();
+	void UpdateScore();
 	void GenerateOutput();
 	void LoadData();
 	void UnloadData();
+	int SecondsPassed;
+	int ShipsHit;
 	
 	// Map of textures loaded
 	std::unordered_map<std::string, SDL_Texture*> mTextures;
