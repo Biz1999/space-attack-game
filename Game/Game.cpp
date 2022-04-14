@@ -14,6 +14,7 @@
 #include "Ship.h"
 #include "BGSpriteComponent.h"
 #include "Score.h"
+#include "Asteroid.h"
 
 Game::Game()
 :mWindow(nullptr)
@@ -33,7 +34,7 @@ bool Game::Initialize()
 		return false;
 	}
 	
-	mWindow = SDL_CreateWindow("Game Programming in C++ (Chapter 2)", 100, 100, 1024, 768, 0);
+	mWindow = SDL_CreateWindow("Game Programming in C++ (Chapter 2)", 100, 100, 1024, 600, 0);
 	if (!mWindow)
 	{
 		SDL_Log("Failed to create window: %s", SDL_GetError());
@@ -67,6 +68,7 @@ void Game::RunLoop()
 		ProcessInput();
 		UpdateGame();
 		GenerateOutput();
+		CreateAsteroid();
 	}
 }
 
@@ -181,15 +183,17 @@ void Game::LoadData()
 {
 	// Create player's ship
 	mShip = new Ship(this);
-	mShip->SetPosition(Vector2(100.0f, 384.0f));
+	mShip->SetPosition(Vector2(100.0f, 300.0f));
 	mShip->SetScale(1.5f);
+
+	Actor* asteroid = new Asteroid(this);
 
 	// Create actor for the background (this doesn't need a subclass)
 	Actor* temp = new Actor(this);
-	temp->SetPosition(Vector2(512.0f, 384.0f));
+	temp->SetPosition(Vector2(512.0f, 300.0f));
 	// Create the "far back" background
 	BGSpriteComponent* bg = new BGSpriteComponent(temp);
-	bg->SetScreenSize(Vector2(1024.0f, 768.0f));
+	bg->SetScreenSize(Vector2(1024.0f, 600.0f));
 	std::vector<SDL_Texture*> bgtexs = {
 		GetTexture("Assets/Farback01.png"),
 		GetTexture("Assets/Farback02.png")
@@ -198,7 +202,7 @@ void Game::LoadData()
 	bg->SetScrollSpeed(-100.0f);
 	// Create the closer background
 	bg = new BGSpriteComponent(temp, 50);
-	bg->SetScreenSize(Vector2(1024.0f, 768.0f));
+	bg->SetScreenSize(Vector2(1024.0f, 600.0f));
 	bgtexs = {
 		GetTexture("Assets/Stars.png"),
 		GetTexture("Assets/Stars.png")
@@ -208,6 +212,20 @@ void Game::LoadData()
 
 	if (!score.Initialize())
 		mIsRunning = false;
+
+}
+
+void Game::CreateAsteroid() {
+	asteroidCount += 1;
+
+	if (asteroidCount == 80) {
+		int randHeigth = rand() % 600 + 0;
+		Actor* asteroid = new Asteroid(this);
+		asteroid->SetPosition(Vector2(1200.0f, randHeigth));
+		asteroid->SetScale(1);
+		printf("%.2d\n", randHeigth);
+		asteroidCount = 0;
+	}
 }
 
 void Game::UnloadData()
