@@ -72,6 +72,9 @@ void Game::RunLoop()
 
 void Game::ProcessInput()
 {
+
+	const Uint8* state = SDL_GetKeyboardState(NULL);
+
 	SDL_Event event;
 	while (SDL_PollEvent(&event))
 	{
@@ -80,10 +83,12 @@ void Game::ProcessInput()
 			case SDL_QUIT:
 				mIsRunning = false;
 				break;
+			case SDL_KEYUP:
+				mShip->ResetShotTime(state);
+				break;
 		}
 	}
 	
-	const Uint8* state = SDL_GetKeyboardState(NULL);
 	if (state[SDL_SCANCODE_ESCAPE])
 	{
 		mIsRunning = false;

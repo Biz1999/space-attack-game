@@ -5,8 +5,8 @@
 
 Shot::Shot(Game* game)
 	:Actor(game)
-	, mSpeed(500.0f),
-	count(0)
+	,mSpeed(1500.0f)
+	,count(0)
 {
 
 	AnimSpriteComponent* asc = new AnimSpriteComponent(this);
@@ -41,7 +41,7 @@ Shot::Shot(Game* game)
 		anims = shotCollision;
 	}
 
-	printf("%d\n", count);
+	//printf("%d\n", count);
 
 	asc->SetAnimTextures(anims);
 

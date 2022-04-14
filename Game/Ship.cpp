@@ -77,29 +77,25 @@ void Ship::ProcessKeyboard(const uint8_t* state)
 	{
 		mDownSpeed -= 300.0f;
 	}
+	if (state[SDL_SCANCODE_KP_ENTER] || state[SDL_SCANCODE_RETURN]) {
 
-	if (state[SDL_SCANCODE_KP_ENTER ]) {
-
-
-		shotCount += 1;
+		printf("entrei\n");
 
 		if (shotCount == 15) {
-			
-			// Create player's ship
+			// Create ship's shot
 			Vector2 pos = GetPosition();
 			mShot = new Shot(pointerGame);
-			mShot->SetPosition(Vector2(pos.x, pos.y));
-			mShot->SetScale(1.0f);
+			mShot->SetPosition(Vector2(pos.x + 20, pos.y));
+			mShot->SetScale(0.5f);
 
 			shotCount = 0;
 		}
 
-
-
-		
-
-
-		//printf("OI");
-
+		shotCount += 1;
 	}
+}
+
+void Ship::ResetShotTime(const uint8_t* state)
+{
+	shotCount = 15;
 }
