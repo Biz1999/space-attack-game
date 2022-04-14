@@ -30,6 +30,7 @@ public:
 	SDL_Texture* GetTexture(const std::string& fileName);
 
 	int cTextureShot;
+	int asteroidCount = 0;
 
 private:
 	void ProcessInput();
@@ -37,6 +38,7 @@ private:
 	void GenerateOutput();
 	void LoadData();
 	void UnloadData();
+	void CreateAsteroid();
 	
 	// Map of textures loaded
 	std::unordered_map<std::string, SDL_Texture*> mTextures;
