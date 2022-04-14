@@ -28,6 +28,9 @@ public:
 	void RemoveSprite(class SpriteComponent* sprite);
 	
 	SDL_Texture* GetTexture(const std::string& fileName);
+
+	int cTextureShot;
+
 private:
 	void ProcessInput();
 	void UpdateGame();
@@ -55,6 +58,7 @@ private:
 
 	// Game-specific
 	class Ship* mShip; // Player's ship
+
 
 	Score score;
 
