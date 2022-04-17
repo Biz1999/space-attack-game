@@ -9,7 +9,6 @@
 #include "Game.h"
 #include "SDL/SDL_image.h"
 #include <algorithm>
-#include "Actor.h"
 #include "SpriteComponent.h"
 #include "Ship.h"
 #include "BGSpriteComponent.h"
@@ -17,8 +16,8 @@
 #include "Asteroid.h"
 
 
-const float ASTEROID_WIDTH = 125.0f;
-const float ASTEROID_HEIGHT = 115.0f;
+const float ASTEROID_WIDTH = 85.0f;
+const float ASTEROID_HEIGHT = 100.0f;
 const float SHOT_WIDTH = 131.0f;
 const float SHOT_HEIGHT = 79.0f;
 
@@ -150,7 +149,7 @@ void Game::ProcessInput()
 			Vector2 pos = mShip->GetPosition();
 			Shot* shot = new Shot(this);
 			shot->SetPosition(Vector2(pos.x + 50, pos.y));
-			shot->SetScale(0.5f);
+			shot->SetScale(0.7f);
 			shots.push_back(shot);
 
 			mShip->SetShotCount(0);
@@ -192,9 +191,35 @@ void Game::UpdateGame()
 	}
 	mPendingActors.clear();
 	
-	for (int i = 0; i < asteroids.size(); i++) {
-		for (int j = 0; j < shots.size(); j++) {
-			this->CheckShotHit(asteroids[i], shots[j]);
+	for (auto& asteroid : asteroids) {
+		for (auto& shot : shots) {
+			if (shot->CollidesWithAsteroid(asteroid)) {
+				if (asteroid->isAsteroidDestroyed())
+					asteroidsDestroyed++;
+			}
+				
+		}
+		if (asteroid->collidesWithShip(mShip))
+			mIsRunning = false;
+	}
+
+	int it = 0;
+	for (auto& asteroid : asteroids) {
+		if (asteroid->GetState() == Actor::EDead)
+			asteroids.erase(asteroids.begin() + it);
+
+		it++;
+	}
+
+	auto shotIt = shots.begin();
+	unsigned int j = 0;
+	while (shotIt != shots.end() && j < shots.size()) {
+		if (shots[j]->GetState() == Actor::EDead) {
+			shotIt = shots.erase(shotIt);
+		}
+		else {
+			j++;
+			shotIt++;
 		}
 	}
 
@@ -207,22 +232,6 @@ void Game::UpdateGame()
 		{
 			deadActors.emplace_back(actor);
 		}
-	}
-
-	int it = 0;
-	for (auto& asteroid : asteroids) {
-		if (asteroid->GetState() == Actor::EDead)
-			asteroids.erase(asteroids.begin() + it);
-
-		it++;
-	}
-
-	it = 0;
-	for (auto& shot : shots) {
-		if (shot->GetState() == Actor::EDead)
-			shots.erase(shots.begin() + it);
-
-		it++;
 	}
 
 	// Delete dead actors (which removes them from mActors)
@@ -263,7 +272,6 @@ void Game::GenerateOutput()
 		SDL_RenderFillRect(mRenderer, &led);
 	}
 
-
 	SDL_RenderPresent(mRenderer);
 }
 
@@ -287,28 +295,7 @@ void Game::CheckAsteroidShip(Actor asteroid, Actor ship) {
 	if (posAsteroid.x == posShip.x + 50) {
 		printf("ta no local");
 	}
-
 }
-
-void Game::CheckShotHit(Actor* asteroid, Actor* shot)
-{
-	float asteroidEndHeight = asteroid->GetPosition().y + (ASTEROID_HEIGHT * asteroid->GetScale());
-	float shotEndHeight = shot->GetPosition().y + (SHOT_HEIGHT * shot->GetScale());
-	float asteroidEndWidth = asteroid->GetPosition().x + (ASTEROID_WIDTH * asteroid->GetScale());
-	float shotEndWidth = shot->GetPosition().x + (SHOT_WIDTH * shot->GetScale());
-
-	if (shotEndHeight >= asteroid->GetPosition().y
-		&& shot->GetPosition().y <= asteroidEndHeight
-		&& shotEndWidth >= asteroid->GetPosition().x
-		&& shot->GetPosition().x <= asteroidEndWidth
-		) {
-		asteroid->SetState(Actor::EDead);
-		shot->SetState(Actor::EDead);
-		asteroidsDestroyed++;
-	}
-		
-}
-
 
 void Game::UnloadData()
 {

@@ -42,7 +42,6 @@ private:
 	void UnloadData();
 	void CreateAsteroid();
 	void CheckAsteroidShip(Actor asteroid, Actor ship);
-	void CheckShotHit(Actor* asteroid, Actor* shot);
 	
 	// Map of textures loaded
 	std::unordered_map<std::string, SDL_Texture*> mTextures;

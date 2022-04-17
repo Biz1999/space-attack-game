@@ -9,7 +9,9 @@ public:
 	void UpdateActor(float deltaTime) override;
 	float GetRightSpeed() const { return mRightSpeed; }
 	bool isAsteroidOffScreen();
+	bool isAsteroidDestroyed();
+	bool collidesWithShip(class Ship* ship);
 private:
 	float mRightSpeed;
-	int life = 10;
+	int life = 5;
 };

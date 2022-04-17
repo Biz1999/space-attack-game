@@ -8,6 +8,7 @@ public:
 	Shot(class Game* game);
 	void UpdateActor(float deltaTime) override;
 	void ProcessKeyboard(const uint8_t* state) const {};
+	bool CollidesWithAsteroid(class Asteroid *asteroid);
 	float GetSpeed() const { return mSpeed; }
 
 private:
