@@ -9,12 +9,17 @@
 #include "Game.h"
 #include "SDL/SDL_image.h"
 #include <algorithm>
-#include "Actor.h"
 #include "SpriteComponent.h"
 #include "Ship.h"
 #include "BGSpriteComponent.h"
 #include "Score.h"
 #include "Asteroid.h"
+
+
+const float ASTEROID_WIDTH = 85.0f;
+const float ASTEROID_HEIGHT = 100.0f;
+const float SHOT_WIDTH = 131.0f;
+const float SHOT_HEIGHT = 79.0f;
 
 Game::Game()
 :mWindow(nullptr)
@@ -61,6 +66,39 @@ bool Game::Initialize()
 	return true;
 }
 
+void Game::LoadData()
+{
+	// Create player's ship
+	mShip = new Ship(this);
+	mShip->SetPosition(Vector2(100.0f, 300.0f));
+	mShip->SetScale(1.5f);
+
+	// Create actor for the background (this doesn't need a subclass)
+	Actor* temp = new Actor(this);
+	temp->SetPosition(Vector2(512.0f, 300.0f));
+	// Create the "far back" background
+	BGSpriteComponent* bg = new BGSpriteComponent(temp);
+	bg->SetScreenSize(Vector2(1024.0f, 600.0f));
+	std::vector<SDL_Texture*> bgtexs = {
+		GetTexture("Assets/Farback01.png"),
+		GetTexture("Assets/Farback02.png")
+	};
+	bg->SetBGTextures(bgtexs);
+	bg->SetScrollSpeed(-100.0f);
+	// Create the closer background
+	bg = new BGSpriteComponent(temp, 50);
+	bg->SetScreenSize(Vector2(1024.0f, 600.0f));
+	bgtexs = {
+		GetTexture("Assets/Stars.png"),
+		GetTexture("Assets/Stars.png")
+	};
+	bg->SetBGTextures(bgtexs);
+	bg->SetScrollSpeed(-200.0f);
+
+	if (!score.Initialize())
+		mIsRunning = false;
+}
+
 void Game::RunLoop()
 {
 	while (mIsRunning)
@@ -86,14 +124,38 @@ void Game::ProcessInput()
 				mIsRunning = false;
 				break;
 			case SDL_KEYUP:
-				mShip->ResetShotTime(state);
-				break;
+				switch (event.key.keysym.sym)
+				{
+					case SDLK_RETURN:
+					{
+						mShip->ResetShotTime(state);
+						break;
+					}
+					default:
+						break;
+				}
 		}
 	}
 	
 	if (state[SDL_SCANCODE_ESCAPE])
 	{
 		mIsRunning = false;
+	}
+
+	if (state[SDL_SCANCODE_KP_ENTER] || state[SDL_SCANCODE_RETURN]) {
+
+		if (mShip->GetShotCount() == 10) {
+			// Create ship's shot
+			Vector2 pos = mShip->GetPosition();
+			Shot* shot = new Shot(this);
+			shot->SetPosition(Vector2(pos.x + 50, pos.y));
+			shot->SetScale(0.7f);
+			shots.push_back(shot);
+
+			mShip->SetShotCount(0);
+		}
+
+		mShip->SetShotCount(1);
 	}
 
 	// Process ship input
@@ -128,6 +190,38 @@ void Game::UpdateGame()
 		mActors.emplace_back(pending);
 	}
 	mPendingActors.clear();
+	
+	for (auto& asteroid : asteroids) {
+		for (auto& shot : shots) {
+			if (shot->CollidesWithAsteroid(asteroid)) {
+				if (asteroid->isAsteroidDestroyed())
+					asteroidsDestroyed++;
+			}
+				
+		}
+		if (asteroid->collidesWithShip(mShip))
+			mIsRunning = false;
+	}
+
+	int it = 0;
+	for (auto& asteroid : asteroids) {
+		if (asteroid->GetState() == Actor::EDead)
+			asteroids.erase(asteroids.begin() + it);
+
+		it++;
+	}
+
+	auto shotIt = shots.begin();
+	unsigned int j = 0;
+	while (shotIt != shots.end() && j < shots.size()) {
+		if (shots[j]->GetState() == Actor::EDead) {
+			shotIt = shots.erase(shotIt);
+		}
+		else {
+			j++;
+			shotIt++;
+		}
+	}
 
 	// Add any dead actors to a temp vector
 	std::vector<Actor*> deadActors;
@@ -145,6 +239,9 @@ void Game::UpdateGame()
 	{
 		delete actor;
 	}
+
+	this->SecondsPassed = SDL_GetTicks() / 1000;
+	this->scoreCount = this->asteroidsDestroyed + this->SecondsPassed;
 }
 
 void Game::GenerateOutput()
@@ -175,56 +272,28 @@ void Game::GenerateOutput()
 		SDL_RenderFillRect(mRenderer, &led);
 	}
 
-
 	SDL_RenderPresent(mRenderer);
-}
-
-void Game::LoadData()
-{
-	// Create player's ship
-	mShip = new Ship(this);
-	mShip->SetPosition(Vector2(100.0f, 300.0f));
-	mShip->SetScale(1.5f);
-
-	Actor* asteroid = new Asteroid(this);
-
-	// Create actor for the background (this doesn't need a subclass)
-	Actor* temp = new Actor(this);
-	temp->SetPosition(Vector2(512.0f, 300.0f));
-	// Create the "far back" background
-	BGSpriteComponent* bg = new BGSpriteComponent(temp);
-	bg->SetScreenSize(Vector2(1024.0f, 600.0f));
-	std::vector<SDL_Texture*> bgtexs = {
-		GetTexture("Assets/Farback01.png"),
-		GetTexture("Assets/Farback02.png")
-	};
-	bg->SetBGTextures(bgtexs);
-	bg->SetScrollSpeed(-100.0f);
-	// Create the closer background
-	bg = new BGSpriteComponent(temp, 50);
-	bg->SetScreenSize(Vector2(1024.0f, 600.0f));
-	bgtexs = {
-		GetTexture("Assets/Stars.png"),
-		GetTexture("Assets/Stars.png")
-	};
-	bg->SetBGTextures(bgtexs);
-	bg->SetScrollSpeed(-200.0f);
-
-	if (!score.Initialize())
-		mIsRunning = false;
-
 }
 
 void Game::CreateAsteroid() {
 	asteroidCount += 1;
 
 	if (asteroidCount == 80) {
-		int randHeigth = rand() % 600 + 0;
-		Actor* asteroid = new Asteroid(this);
+		float randHeigth = rand() % 600 + 0.0f;
+		Asteroid* asteroid = new Asteroid(this);
 		asteroid->SetPosition(Vector2(1200.0f, randHeigth));
 		asteroid->SetScale(1);
-		printf("%.2d\n", randHeigth);
+
+		asteroids.push_back(asteroid);
 		asteroidCount = 0;
+	}
+}
+
+void Game::CheckAsteroidShip(Actor asteroid, Actor ship) {
+	Vector2 posAsteroid = asteroid.GetPosition();
+	Vector2 posShip = mShip->GetPosition();
+	if (posAsteroid.x == posShip.x + 50) {
+		printf("ta no local");
 	}
 }
 
