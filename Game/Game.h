@@ -13,6 +13,8 @@
 #include <vector>
 #include "Score.h"
 
+using namespace std;
+
 class Game
 {
 public:
@@ -39,6 +41,8 @@ private:
 	void LoadData();
 	void UnloadData();
 	void CreateAsteroid();
+	void CheckAsteroidShip(Actor asteroid, Actor ship);
+	void CheckShotHit(Actor* asteroid, Actor* shot);
 	
 	// Map of textures loaded
 	std::unordered_map<std::string, SDL_Texture*> mTextures;
@@ -61,10 +65,11 @@ private:
 	// Game-specific
 	class Ship* mShip; // Player's ship
 
+	std::vector<class Asteroid*> asteroids;
+	std::vector<class Shot*> shots;
 
 	Score score;
-
 	int scoreCount;
-
-	
+	int SecondsPassed;
+	int asteroidsDestroyed;
 };

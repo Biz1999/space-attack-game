@@ -1,11 +1,12 @@
 #include "Shot.h"
 #include "AnimSpriteComponent.h"
-#include "Game.h"
 
+const float WINDOW_WIDTH = 1024.0f;
+const float SHOT_WIDTH = 131.0f;
 
 Shot::Shot(Game* game)
 	:Actor(game)
-	,mSpeed(1500.0f)
+	,mSpeed(1000.0f)
 	,count(0)
 {
 
@@ -13,6 +14,8 @@ Shot::Shot(Game* game)
 	std::vector<SDL_Texture*> shotInitial = {
 		game->GetTexture("Assets/shot_start.png"),
 		game->GetTexture("Assets/shot_start2.png"),
+		game->GetTexture("Assets/shot_middle.png"),
+		game->GetTexture("Assets/shot_middle2.png")
 	};
 
 	std::vector<SDL_Texture*> shotMiddle = {
@@ -33,9 +36,12 @@ Shot::Shot(Game* game)
 
 	if (count == 0) {
 		anims = shotInitial;
-		count = 1;
-	} else if (count == 1) {
+		asc->SetAnimTextures(anims);
+	} 
+
+	if (count == 1) {
 		anims = shotMiddle;
+		asc->SetAnimTextures(anims);
 	}
 	else {
 		anims = shotCollision;
@@ -43,7 +49,7 @@ Shot::Shot(Game* game)
 
 	//printf("%d\n", count);
 
-	asc->SetAnimTextures(anims);
+	// asc->SetAnimTextures(anims);
 
 }
 
@@ -55,19 +61,20 @@ void Shot::UpdateActor(float deltaTime)
 	Vector2 pos = GetPosition();
 	pos.x += mSpeed * deltaTime;
 	pos.y = pos.y;
-	// Restrict position to left half of screen
-	if (pos.x > 1024)
-	{
-		Actor::SetState(Actor::EDead);
-	}
 	
+	if (this->isShotOffScreen())
+		Actor::SetState(Actor::EDead);
+
 	SetPosition(pos);
 }
 
-
-void Shot::ProcessKeyboard(const uint8_t* state)
+bool Shot::isShotOffScreen()
 {
-	
-}
+	float shotScreenPosition = this->GetPosition().x;
 
+	if (shotScreenPosition > WINDOW_WIDTH)
+		return true;
+
+	return false;
+}
 

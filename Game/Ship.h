@@ -16,8 +16,10 @@ public:
 	void UpdateActor(float deltaTime) override;
 	void ProcessKeyboard(const uint8_t* state);
 	void ResetShotTime(const uint8_t* state);
+	void SetShotCount(int shotCount);
 	float GetRightSpeed() const { return mRightSpeed; }
 	float GetDownSpeed() const { return mDownSpeed; }
+	int GetShotCount() const { return shotCount; }
 private:
 	float mRightSpeed;
 	float mDownSpeed;

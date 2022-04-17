@@ -1,9 +1,12 @@
 #include "Asteroid.h"
 #include "AnimSpriteComponent.h"
-#include "Game.h"
 #include <stdlib.h> 
 
 using namespace std;
+
+const float ASTEROID_WIDTH = 125.0f;
+
+
 Asteroid::Asteroid(Game* game)
 	:Actor(game)
 	,mRightSpeed(-300.0f)
@@ -26,8 +29,18 @@ void Asteroid::UpdateActor(float deltaTime) {
 	Actor::UpdateActor(deltaTime);
 	Vector2 pos = GetPosition();
 	pos.x += mRightSpeed * deltaTime;
-	if (pos.x < 0) {
-		//destroy object
-	}
 	SetPosition(pos);
+
+	if (this->isAsteroidOffScreen())
+		this->SetState(Actor::EDead);
+}
+
+bool Asteroid::isAsteroidOffScreen()
+{
+	float asteroidScreenPosition = this->GetPosition().x + ASTEROID_WIDTH;
+
+	if (asteroidScreenPosition < 0)
+		return true;
+
+	return false;
 }
